@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        TodoApp
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container bg-light card card-body">
+        <p class="lead">Oops!! You're offline, failed to load your todos. Please go online to check your todos. </p>
+    </div>
+{% endblock %}

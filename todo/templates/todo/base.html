@@ -1,0 +1,52 @@
+{% load static %}
+{% load tz_detect %}
+{% tz_detect %}
+{% load pwa %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% progressive_web_app_meta %}
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+    crossorigin="anonymous">
+    <!-- <link rel="favicon" type="image/png" href="/media/images/todo.png" /> -->
+    <link rel="stylesheet" href="{% static 'todo/css/main.css' %}">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand text-white" href="{% url 'main-home' %}" >Online Todo App</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'user-logout' %}" class="ml-auto btn btn-outline-light btn-sm">Logout</a>
+        {% else %}
+            <a href="{% url 'user-login' %}" class="ml-auto btn btn-outline-light btn-sm">Login</a>
+            <a href="{% url 'user-register' %}" class="ml-2 btn btn-outline-light btn-sm">Register</a>
+        {% endif %}
+    </nav>
+    <div class=" mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="text-center footer fixed-bottom">
+        <small class="text-muted">Copyright &copy; - {% now "Y" %} Arijit Saha</small>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous"></script>
+</body>
+</html>

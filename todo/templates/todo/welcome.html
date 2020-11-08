@@ -1,0 +1,20 @@
+{% extends 'todo/base.html' %}
+{% load crispy_forms_tags %}
+{% load tz_detect %}
+{% tz_detect %}
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        TodoApp
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="bg-blue text-light jumbo">
+        <div class="container">
+            <h1 class="display-4">Online ToDo App</h1>
+            <p class="lead"><span class="fa fa-check-square pr-2"></span>Keep tracking your work.</p>
+            <a href="{% url 'user-register' %}" class="btn btn-outline-light">Register Now</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  border: 2px solid #2196f2;
+}
+
+.bg-blue {
+  background: #5cb0f0;
+}
+
+div.jumbo {
+  padding: 10% 0;
+  height: 90vh;
+}
+
+#hint_id_password1 {
+  display: none;
+}

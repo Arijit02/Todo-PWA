@@ -1,0 +1,67 @@
+{% extends 'todo/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        TodoApp
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="card cardbody container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mt-3">
+                    <span class="close" data-dismiss="alert">&times;</span>
+                    <p><span class="fa fa-check-circle-o pr-2"></span>{{ message|safe }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h6 class="text-muted pt-4 text-right">Total Todos - {{ todos|length }}</h6>
+        <ul class="list-group py-3">
+            {% for todo in todos %}
+                <li class="list-group item d-inline py-3 my-1">
+                    <div class="row">
+                        <div class="col-6 pl-5">
+                            <span class="fa fa-long-arrow-right"></span>
+                            <h3 class="d-inline">{{ todo.title }}</h3>
+                            <p class="pl-4 pt-2">{{ todo.item }}</p>
+                        </div>
+                        <div class="col-3">
+                            {{ todo.created_at|date:"j-m-o P" }}
+
+                        </div>
+                        <div class="col-2">
+                            <a href="{% url 'todo-delete' todo.user.username todo.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>   
+    </div>
+    <div class="mt-5 container-fluid">
+        <button data-toggle="modal" data-target="#newItemModal" class="btn btn-primary btn-lg">
+            <span class="fa fa-plus pr-2"></span>Add
+        </button>        
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal" id="newItemModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Item</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" class="btn btn-primary btn-block" value="Create">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
